@@ -3,103 +3,509 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Xander | 个人网站</title>
+  <meta name="description" content="Chen Xin (Xander) - Materials science and electrocatalysis portfolio.">
+  <title>Chen Xin (Xander) | Materials Science & Electrocatalysis</title>
   <style>
+    :root {
+      --ink: #13233f;
+      --muted: #61708a;
+      --line: #dbe3ee;
+      --surface: #ffffff;
+      --wash: #f4f7fb;
+      --blue: #2563eb;
+      --blue-dark: #1645ae;
+      --teal: #0f8a83;
+      --shadow: 0 18px 50px rgba(19, 35, 63, 0.08);
+    }
+
     * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
-      color: #202124;
-      background: #f7f8fa;
-      font-family: Arial, "Microsoft YaHei", sans-serif;
-      line-height: 1.7;
+      color: var(--ink);
+      background: var(--wash);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
     }
 
-    main {
-      width: min(760px, calc(100% - 40px));
+    a { color: inherit; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(219, 227, 238, 0.9);
+      background: rgba(244, 247, 251, 0.94);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      width: min(1120px, calc(100% - 40px));
+      min-height: 68px;
       margin: 0 auto;
-      padding: 72px 0;
-    }
-
-    header {
       display: flex;
       align-items: center;
-      gap: 28px;
-      margin-bottom: 64px;
+      justify-content: space-between;
+      gap: 24px;
     }
 
-    .avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 42px;
-    }
-
-    h2 { margin-top: 40px; }
-
-    .subtitle {
-      margin: 6px 0 0;
-      color: #62676f;
-    }
-
-    a {
-      color: #0969da;
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-weight: 760;
+      letter-spacing: 0;
       text-decoration: none;
     }
 
-    a:hover { text-decoration: underline; }
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--blue);
+      border-radius: 7px;
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 800;
+    }
 
-    footer {
-      margin-top: 64px;
-      color: #62676f;
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--muted);
       font-size: 14px;
     }
 
-    @media (max-width: 560px) {
-      header {
-        align-items: flex-start;
-        flex-direction: column;
+    .nav-links a { text-decoration: none; }
+    .nav-links a:hover { color: var(--blue); }
+
+    .hero {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 72px 0 64px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+      align-items: center;
+      gap: 72px;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      max-width: 740px;
+      margin-bottom: 20px;
+      font-size: 72px;
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .hero-lede {
+      max-width: 690px;
+      margin-bottom: 28px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 44px;
+      padding: 0 16px;
+      border: 1px solid var(--blue);
+      border-radius: 6px;
+      color: #fff;
+      background: var(--blue);
+      font-size: 14px;
+      font-weight: 750;
+      text-decoration: none;
+    }
+
+    .button:hover { background: var(--blue-dark); }
+
+    .button.secondary {
+      border-color: var(--line);
+      color: var(--ink);
+      background: var(--surface);
+    }
+
+    .button.secondary:hover { border-color: var(--blue); color: var(--blue); }
+
+    .hero-visual {
+      min-height: 340px;
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .profile {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      justify-items: center;
+      gap: 16px;
+      text-align: center;
+    }
+
+    .avatar {
+      width: 150px;
+      height: 150px;
+      border: 7px solid #fff;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 12px 30px rgba(19, 35, 63, 0.15);
+    }
+
+    .profile strong { font-size: 20px; }
+    .profile span { color: var(--muted); font-size: 14px; }
+
+    .signal {
+      width: 100%;
+      margin-top: 10px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      text-align: left;
+    }
+
+    .signal-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 9px;
+    }
+
+    .signal-row b { color: var(--ink); }
+
+    .band {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: var(--surface);
+    }
+
+    .section {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 74px 0;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 28px;
+      margin-bottom: 30px;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 0;
+      font-size: 32px;
+      line-height: 1.15;
+    }
+
+    .section-heading p {
+      max-width: 500px;
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 44px;
+    }
+
+    .about-grid p { color: var(--muted); }
+
+    .focus-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .focus-list li {
+      padding: 14px 15px;
+      border-left: 3px solid var(--blue);
+      background: var(--wash);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .work-item {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+
+    .work-kicker {
+      margin-bottom: 12px;
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .work-item h3 {
+      margin-bottom: 9px;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .work-item p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .work-item a { color: var(--blue); text-decoration: none; }
+    .work-item a:hover { text-decoration: underline; }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .meta span {
+      padding: 3px 8px;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      background: var(--wash);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 28px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .timeline-item time {
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .timeline-item h3 { margin-bottom: 4px; font-size: 18px; }
+    .timeline-item p { margin-bottom: 0; color: var(--muted); font-size: 14px; }
+
+    .closing {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 28px 0;
+    }
+
+    .closing p { margin-bottom: 0; color: var(--muted); font-size: 14px; }
+
+    footer {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 24px 0 38px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 820px) {
+      h1 { font-size: 56px; }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 38px;
+        padding-top: 52px;
       }
 
-      h1 { font-size: 34px; }
+      .hero-visual { max-width: 560px; }
+      .about-grid, .work-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .nav, .hero, .section, footer { width: min(100% - 28px, 1120px); }
+      .nav { min-height: 60px; }
+      .nav-links { gap: 12px; font-size: 12px; }
+      .nav-links a:nth-child(-n+2) { display: none; }
+      h1 { font-size: 44px; }
+      .hero-lede { font-size: 16px; }
+      .section { padding: 56px 0; }
+      .section-heading { display: block; }
+      .section-heading h2 { margin-bottom: 10px; }
+      .focus-list { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 1fr; gap: 6px; }
+      .closing { align-items: flex-start; flex-direction: column; }
     }
   </style>
 </head>
 <body>
-  <main>
-    <header>
-      <img class="avatar"
-           src="https://github.com/Xander-CJJ.png"
-           alt="Xander 的头像">
-      <div>
-        <h1>你好，我是 Xander</h1>
-        <p class="subtitle">欢迎来到我的个人网站</p>
+  <div class="topbar">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="#top"><span class="brand-mark">CX</span><span>Chen Xin</span></a>
+      <div class="nav-links">
+        <a href="#about">About / 关于</a>
+        <a href="#research">Research / 研究</a>
+        <a href="#experience">Experience / 经历</a>
+        <a href="https://github.com/Xander-CJJ" target="_blank" rel="noreferrer">GitHub ↗</a>
       </div>
-    </header>
+    </nav>
+  </div>
 
-    <section>
-      <h2>关于我</h2>
-      <p>我正在学习如何使用 GitHub，并在这里记录自己的学习、项目和成长。</p>
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div>
+        <p class="eyebrow">Materials science · Electrocatalysis</p>
+        <h1 id="hero-title">Chen Xin<br><span>(Xander)</span></h1>
+        <p class="hero-lede">材料科学与工程本科生，专注于能源材料、电催化与海水氧化。<br>Materials science and engineering undergraduate exploring electrocatalysis for sustainable energy conversion.</p>
+        <div class="hero-actions">
+          <a class="button" href="#research">Explore research <span aria-hidden="true">→</span></a>
+          <a class="button secondary" href="https://github.com/Xander-CJJ" target="_blank" rel="noreferrer">View GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-label="Profile summary">
+        <div class="profile">
+          <img class="avatar" src="https://github.com/Xander-CJJ.png" alt="Chen Xin 的 GitHub 头像">
+          <strong>Research-minded builder</strong>
+          <span>Jiangsu University of Science and Technology<br>江苏科技大学 · B.Eng. Candidate · 2023-2027</span>
+          <div class="signal">
+            <div class="signal-row"><span>Focus / 方向</span><b>Energy materials</b></div>
+            <div class="signal-row"><span>Mode / 方式</span><b>Design · Test · Learn</b></div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section>
-      <h2>我的项目</h2>
-      <p>项目内容即将更新。</p>
+    <div class="band" id="about">
+      <section class="section" aria-labelledby="about-title">
+        <div class="section-heading">
+          <h2 id="about-title">About / 关于我</h2>
+          <p>From material design to electrochemical testing, I enjoy turning a research question into a clear, testable experiment.<br>从材料设计到电化学测试，我关注把问题变成可验证、可复现的实验。</p>
+        </div>
+        <div class="about-grid">
+          <div>
+            <p>I am an undergraduate researcher in Materials Science and Engineering at Jiangsu University of Science and Technology. My current work centers on transition-metal-based electrocatalysts for oxygen evolution and seawater oxidation.</p>
+            <p>我目前负责一项国家级大学生创新项目，持续训练文献阅读、材料合成、结构表征、性能分析与学术写作能力。</p>
+          </div>
+          <ul class="focus-list" aria-label="Research interests">
+            <li>Energy materials<br><span>能源材料</span></li>
+            <li>Electrocatalysis<br><span>电催化</span></li>
+            <li>Seawater oxidation<br><span>海水氧化</span></li>
+            <li>Green hydrogen<br><span>绿色制氢</span></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <section class="section" id="research" aria-labelledby="research-title">
+      <div class="section-heading">
+        <h2 id="research-title">Selected work / 研究成果</h2>
+        <p>Selected publications and inventions from my work in oxygen evolution electrocatalysis.<br>以下成果来自我在析氧反应电催化方向的研究。</p>
+      </div>
+      <div class="work-grid">
+        <article class="work-item">
+          <div class="work-kicker">Article · First author</div>
+          <h3>Dynamic activation of lattice oxygen in medium-entropy CoNiFe-based spinel oxides decorated with in situ formed alloy for efficient oxygen evolution reaction</h3>
+          <p>一锅溶液燃烧策略构筑合金修饰的中熵尖晶石氧化物，探索晶格氧活化与导电性增强的协同作用。</p>
+          <div class="meta"><span>New J. Chem. · 2025</span><a href="https://doi.org/10.1039/d5nj00812c" target="_blank" rel="noreferrer">DOI ↗</a></div>
+        </article>
+
+        <article class="work-item">
+          <div class="work-kicker">Article · First author</div>
+          <h3>Stabilizing phosphate anions in oxygen-vacancy-rich NiFe2O4 spinel oxides for enhanced OER electrocatalysis</h3>
+          <p>通过磷酸根与氧空位协同调控，提升碱性及海水相关条件下的析氧活性与长期稳定性。</p>
+          <div class="meta"><span>Int. J. Hydrogen Energy · manuscript under review</span></div>
+        </article>
+
+        <article class="work-item">
+          <div class="work-kicker">Article · Third author</div>
+          <h3>Surface-reconstructed nanoporous (CoNiFe)OOH modulated by Zn(OH)4 anions</h3>
+          <p>利用阴离子调控表面重构，构建协同增强的纳米多孔羟基氧化物电催化体系。</p>
+          <div class="meta"><span>Nano Res. · 2025</span><a href="https://doi.org/10.26599/NR.2025.94907809" target="_blank" rel="noreferrer">DOI ↗</a></div>
+        </article>
+
+        <article class="work-item">
+          <div class="work-kicker">National undergraduate innovation project</div>
+          <h3>Electrode structure design based on multicomponent alloys for seawater oxidation</h3>
+          <p>负责文献调研、实验设计、样品制备、电化学测试、数据分析与项目报告，研究多组元合金电极的结构-性能关系。</p>
+          <div class="meta"><span>Principal investigator · 2024-2027</span></div>
+        </article>
+      </div>
     </section>
 
-    <section>
-      <h2>联系我</h2>
-      <p>
-        <a href="https://github.com/Xander-CJJ">访问我的 GitHub</a>
-      </p>
-    </section>
+    <div class="band" id="experience">
+      <section class="section" aria-labelledby="experience-title">
+        <div class="section-heading">
+          <h2 id="experience-title">Experience / 经历</h2>
+          <p>Research, leadership, and the habits that make collaborative work move forward.<br>研究、组织与协作，是我持续积累的三种能力。</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <time>2025 - present<br>2025 - 至今</time>
+            <div><h3>President · Student Associations Federation</h3><p>统筹社团招新、社团文化节等大型校园活动，协调 113 个社团与 5,000+ 名参与者的现场执行。</p></div>
+          </div>
+          <div class="timeline-item">
+            <time>2025 - present<br>2025 - 至今</time>
+            <div><h3>President · Innovation and Entrepreneurship Association</h3><p>组织创新创业讲座、项目分享和学生交流活动，推动更多同学参与创新实践。</p></div>
+          </div>
+          <div class="timeline-item">
+            <time>2023 - 2027<br>2023 - 2027</time>
+            <div><h3>B.Eng. Candidate · Materials Science and Engineering</h3><p>Jiangsu University of Science and Technology · 江苏科技大学</p></div>
+          </div>
+        </div>
 
-    <footer>© 2026 Xander</footer>
+        <div class="closing">
+          <p>Patents / 专利：3 Chinese invention patent applications as first inventor.</p>
+          <a class="button secondary" href="https://github.com/Xander-CJJ" target="_blank" rel="noreferrer">Connect on GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+    </div>
   </main>
+
+  <footer>© 2026 Chen Xin (Xander) · Built with GitHub Pages</footer>
 </body>
 </html>
